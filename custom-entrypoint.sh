@@ -7,6 +7,9 @@ fi
 if [ -n ${AMZN_ES_REGION} ]; then
         sed -i -e 's~AMZN_ES_REGION~'${AMZN_ES_REGION}'~g' /fluentd/etc/fluentd.conf
 fi
+if [ -n ${ASSUME_ROLE_ARN} ]; then
+        sed -i -e 's~ASSUME_ROLE_ARN~'${ASSUME_ROLE_ARN}'~g' /fluentd/etc/fluentd.conf
+fi
 
 # quote original entrypoint.sh
 DEFAULT=/etc/default/fluentd
@@ -33,4 +36,5 @@ if [ "$1" = "fluentd" ]; then
     fi
 fi
 
-exec "$@"
+# run as root to write buffer file
+exec su-exec root "$@"
