@@ -7,8 +7,11 @@ fi
 if [ -n ${AMZN_ES_REGION} ]; then
         sed -i -e 's~AMZN_ES_REGION~'${AMZN_ES_REGION}'~g' /fluentd/etc/fluentd.conf
 fi
-if [ -n ${ASSUME_ROLE_ARN} ]; then
-        sed -i -e 's~ASSUME_ROLE_ARN~'${ASSUME_ROLE_ARN}'~g' /fluentd/etc/fluentd.conf
+if [ -n ${ACCESS_KEY} ]; then
+        sed -i -e 's~ACCESS_KEY~'${ACCESS_KEY}'~g' /fluentd/etc/fluentd.conf
+fi
+if [ -n ${SECRET_KEY} ]; then
+        sed -i -e 's~SECRET_KEY~'${SECRET_KEY}'~g' /fluentd/etc/fluentd.conf
 fi
 
 # quote original entrypoint.sh
